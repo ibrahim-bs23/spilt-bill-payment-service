@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-public class SkeletonServiceApplication {
+public class PaymentServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SkeletonServiceApplication.class, args);
+        SpringApplication.run(PaymentServiceApplication.class, args);
     }
 
 }
