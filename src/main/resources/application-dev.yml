@@ -54,5 +54,6 @@ logging:
   config: classpath:log/logback-dev.xml
 
 services:
-  remittance:
-    base-url: localhost:5089
+  user:
+    base-url: localhost:9220
+
