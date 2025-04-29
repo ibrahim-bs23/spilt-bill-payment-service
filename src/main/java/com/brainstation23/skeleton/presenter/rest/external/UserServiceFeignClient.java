@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-@FeignClient(name = "${services.user.base-url}", path = "/api/v1/user", contextId = "user-service")
+@FeignClient(name = "user-service", url = "${services.user.base-url}", path = "/api/v1/user", contextId = "user-service")
 public interface UserServiceFeignClient {
-
     @PostMapping("/payment/initiate")
     ApiResponse<?> initiatePayment(@RequestBody PaymentRequest paymentRequest);
 }
+

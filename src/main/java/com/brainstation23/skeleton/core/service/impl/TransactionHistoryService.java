@@ -22,7 +22,7 @@ public class TransactionHistoryService extends BaseService {
     private final TransactionHistoryRepository transactionHistoryRepository;
     private final NonTransactionalIntegrationService nonTransactionalIntegrationService;
 
-    @Transactional
+
     public void initiateTransaction(PaymentRequest paymentRequest) {
 
         validatePaymentRequest(paymentRequest);
@@ -32,7 +32,6 @@ public class TransactionHistoryService extends BaseService {
         processTransaction(paymentRequest);
     }
 
-    @Transactional
     public void processTransaction(PaymentRequest paymentRequest) {
         nonTransactionalIntegrationService.initiatePaymentProcess(paymentRequest);
     }
@@ -71,6 +70,7 @@ public class TransactionHistoryService extends BaseService {
                 () -> new RecordNotFoundException(ResponseMessage.RECORD_NOT_FOUND)
         );
         transactionHistory.setStatus("COMPLETED");
+        transactionHistory.setUpdatedAt(new Date());
         transactionHistoryRepository.save(transactionHistory);
     }
 }
