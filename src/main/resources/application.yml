@@ -63,4 +63,12 @@ spring:
 springdoc:
   paths-to-exclude: /swagger-resources/**, /v3/api-docs/**, /v2/api-docs/**
 
+feign:
+  client:
+    config:
+      default:
+        ribbon:
+          enabled: false
+
+
 
