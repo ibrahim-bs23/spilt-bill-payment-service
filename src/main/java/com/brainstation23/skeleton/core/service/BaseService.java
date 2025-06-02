@@ -138,4 +138,8 @@ public class BaseService {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
+    public String getUserName() {
+        return getCurrentUserContext().getUsername();
+    }
+
 }

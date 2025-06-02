@@ -9,6 +9,8 @@ import com.brainstation23.skeleton.data.entity.TransactionHistory;
 import com.brainstation23.skeleton.data.repository.TransactionHistoryRepository;
 import com.brainstation23.skeleton.presenter.service.nonTransactional.NonTransactionalIntegrationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,5 +74,12 @@ public class TransactionHistoryService extends BaseService {
         transactionHistory.setStatus("COMPLETED");
         transactionHistory.setUpdatedAt(new Date());
         transactionHistoryRepository.save(transactionHistory);
+    }
+
+    public Page<TransactionHistory> getTransactionHistories(int page, int size) {
+
+        final String username =  getUserName();
+
+        return transactionHistoryRepository.findBySenderUsernameOrReceiverUsername(username, username, PageRequest.of(page, size));
     }
 }

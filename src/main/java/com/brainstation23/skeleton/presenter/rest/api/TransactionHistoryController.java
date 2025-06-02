@@ -7,8 +7,10 @@ import com.brainstation23.skeleton.core.domain.model.ApiResponse;
 import com.brainstation23.skeleton.core.domain.requests.PaymentRequest;
 import com.brainstation23.skeleton.core.service.BaseService;
 import com.brainstation23.skeleton.core.service.impl.TransactionHistoryService;
+import com.brainstation23.skeleton.data.entity.TransactionHistory;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +32,15 @@ public class TransactionHistoryController extends BaseService {
         transactionHistoryService.updateTransactionStatus(transactionId);
         return ResponseUtils.createSuccessResponseObject(getMessage(ResponseMessage.OPERATION_SUCCESSFUL));
     }
+
+    @GetMapping("/transaction-history")
+    public ApiResponse<Page<TransactionHistory>> getAllTransactions(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseUtils.createSuccessResponseObject(getMessage(ResponseMessage.OPERATION_SUCCESSFUL),
+                transactionHistoryService.getTransactionHistories(page, size));
+    }
+
+
 
 }
