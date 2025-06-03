@@ -33,7 +33,7 @@ info:
 
 spring:
   profiles:
-    active: test
+    active: dev
   application:
     name: payment-service
   lifecycle:
